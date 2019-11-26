@@ -5,6 +5,7 @@ import invariant from 'invariant';
 import {LeftIcon, RightIcon, BulletIcon} from './IconSvg';
 import {isNumber} from './utils/isType';
 import TabModal from './TabModal';
+import NativeListener from './utils/NativeListener';
 
 const buttonWidth = 35;
 const getPadding = ({showModalButton, showArrowButton}) => {
@@ -49,7 +50,6 @@ const ListScroll = styled.ul`
   margin: 0;
   list-style: none;
   display: inline-block;
-  transition: transform .3s cubic-bezier(.42, 0, .58, 1);
 `;
 
 const ActionButtonStyle = styled.div`
@@ -154,6 +154,7 @@ export default class TabListComponent extends React.Component<Props, State> {
       //if we scroll to the last tab, alignment is set to the right side of the tab
       const rectSide = this.props.activeIndex === this.props.children.length - 1 ? 'right' : 'left';
       this.scrollToIndex(this.props.activeIndex, rectSide);
+      this.toggleModal(false);
     }
     // if prev state show arrow button, and current state doesn't show
     // need to reset the scroll position, or some tabs will be hided by container.
@@ -182,7 +183,7 @@ export default class TabListComponent extends React.Component<Props, State> {
     return parseFloat((width / 3) * 2);
   }
 
-  handleScroll(direction: 'right' | 'left') {
+  handleScroll(direction: 'right' | 'left', scrollWidth) {
     let leftMove = 0;
     const containerOffset = this.listContainer.getBoundingClientRect();
     const containerWidth = this.listContainer.offsetWidth;
@@ -192,19 +193,23 @@ export default class TabListComponent extends React.Component<Props, State> {
     if (direction === 'right') {
       leftMove = tabLastOffset.right - containerOffset.right;
       if (leftMove > containerWidth) {
-        leftMove = this.unifyScrollMax(containerWidth);
+        leftMove = this.unifyScrollMax(scrollWidth || containerWidth);
       }
     } else if (direction === 'left') {
       leftMove = tabFirstOffset.left - containerOffset.left;
       if (-leftMove > containerWidth) {
-        leftMove = - this.unifyScrollMax(containerWidth);
+        leftMove = - this.unifyScrollMax(scrollWidth || containerWidth);
       }
     }
     this.scrollPosition += leftMove;
     if (this.scrollPosition < 0) {
       this.scrollPosition = 0;
     }
-
+    if(!scrollWidth){
+        this.listScroll.style.transition='transform .3s cubic-bezier(.42, 0, .58, 1)';
+    }else{
+        this.listScroll.style.transition=null;
+    }
     this.listScroll.style.transform = `translate3d(-${this.scrollPosition}px, 0, 0)`;
   }
 
@@ -228,12 +233,7 @@ export default class TabListComponent extends React.Component<Props, State> {
   }
 
   toggleModal(open: boolean) {
-    this.setState({modalIsOpen: open}, () => {
-      if (!open) {
-        // $FlowFixMe
-        this.scrollToIndex(this.props.activeIndex, 'right');
-      }
-    });
+    this.setState({modalIsOpen: open});
   }
 
   isShowModalButton() {
@@ -328,11 +328,24 @@ export default class TabListComponent extends React.Component<Props, State> {
     const FoldButton = makeFoldButton(ActionButton);
     invariant(this.props.children, 'React-tabtab Error: You MUST pass at least one tab')
     return (
-      <div>
+      <div >
+
         {ExtraButton ? ExtraButton : null}
-        <TabList hasExtraButton={!!ExtraButton}
+          <NativeListener onWheel={(event)=>{
+              event.preventDefault();
+              event.stopPropagation();
+              if(event.deltaY>0 || event.deltaX>0){
+                  this.handleScroll('right',Math.max(Math.abs(event.deltaY),Math.abs(event.deltaX)));
+              }else{
+                  this.handleScroll('left',Math.max(Math.abs(event.deltaY),Math.abs(event.deltaX)));
+
+              }
+          }}>
+        <TabList id="tablist_scroll"
+                 hasExtraButton={!!ExtraButton}
                  showModalButton={this.state.showModalButton}
-                 showArrowButton={this.state.showArrowButton}>
+                 showArrowButton={this.state.showArrowButton}
+        >
           {this.state.showModalButton ?
             <FoldButton ref={node => this.foldNode = node}
                         onClick={this.toggleModal.bind(this, true)}
@@ -347,7 +360,9 @@ export default class TabListComponent extends React.Component<Props, State> {
             </ListScroll>
           </ListInner>
         </TabList>
-        {modalIsOpen ?
+          </NativeListener>
+
+          {modalIsOpen ?
           <TabModal closeModal={this.toggleModal.bind(this, false)}
                     handleTabSequence={handleTabSequence}
                     handleTabChange={handleTabChange}

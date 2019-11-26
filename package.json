@@ -139,9 +139,5 @@
     "snapshotSerializers": [
       "enzyme-to-json/serializer"
     ]
-  },
-  "pre-commit": [
-    "lint",
-    "test"
-  ]
+  }
 }
