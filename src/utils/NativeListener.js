@@ -1,4 +1,6 @@
 // @flow
+/* eslint-disable */
+
 import { Component } from 'react'
 import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
@@ -39,11 +41,11 @@ const events = [
     'TouchEnd',
     'TouchCancel',
     'Wheel',
-]
+];
 
 const aliases = {
     DoubleClick: 'dblclick'
-}
+};
 
 const toEventName = (event: string): string =>
     (aliases[event] || event).toLowerCase()

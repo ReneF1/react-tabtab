@@ -171,7 +171,7 @@ export default class TabListComponent extends React.Component<Props, State> {
     }
   }
 
-  getTabNode(tab: any): React.ElementRef<any> {
+  getTabNode(tab: any): React.ElementRef<any> { // eslint-disable-line
     if (tab.__INTERNAL_NODE) { // normal tab
       return tab.__INTERNAL_NODE;
     } else if (tab.__DRAG_TAB_INTERNAL_NODE) { // drag tab
@@ -189,22 +189,34 @@ export default class TabListComponent extends React.Component<Props, State> {
     const containerWidth = this.listContainer.offsetWidth;
     const tabFirstOffset = this.getTabNode(this.tabRefs[0]).getBoundingClientRect();
     const tabLastOffset = this.getTabNode(this.tabRefs[this.tabRefs.length - 1]).getBoundingClientRect();
-
     if (direction === 'right') {
       leftMove = tabLastOffset.right - containerOffset.right;
       if (leftMove > containerWidth) {
-        leftMove = this.unifyScrollMax(scrollWidth || containerWidth);
+        leftMove = this.unifyScrollMax(containerWidth);
       }
     } else if (direction === 'left') {
       leftMove = tabFirstOffset.left - containerOffset.left;
       if (-leftMove > containerWidth) {
-        leftMove = - this.unifyScrollMax(scrollWidth || containerWidth);
+        leftMove = - this.unifyScrollMax( containerWidth);
       }
     }
-    this.scrollPosition += leftMove;
+    if(scrollWidth){
+        if(direction==='right'){
+            const max = tabLastOffset.right- containerOffset.right;
+            if(max>=0){
+                this.scrollPosition+=scrollWidth;
+            }
+        }else{
+            this.scrollPosition-=scrollWidth;
+        }
+    }else{
+        this.scrollPosition += leftMove;
+    }
+
     if (this.scrollPosition < 0) {
       this.scrollPosition = 0;
     }
+
     if(!scrollWidth){
         this.listScroll.style.transition='transform .3s cubic-bezier(.42, 0, .58, 1)';
     }else{
@@ -292,7 +304,7 @@ export default class TabListComponent extends React.Component<Props, State> {
     ));
   }
 
-  renderArrowButton(ScrollButton: React.ComponentType<*>) {
+  renderArrowButton(ScrollButton: React.ComponentType<*>) { // eslint-disable-line
     const {showArrowButton} = this.state;
     if (showArrowButton) {
       return (
@@ -331,16 +343,7 @@ export default class TabListComponent extends React.Component<Props, State> {
       <div >
 
         {ExtraButton ? ExtraButton : null}
-          <NativeListener onWheel={(event)=>{
-              event.preventDefault();
-              event.stopPropagation();
-              if(event.deltaY>0 || event.deltaX>0){
-                  this.handleScroll('right',Math.max(Math.abs(event.deltaY),Math.abs(event.deltaX)));
-              }else{
-                  this.handleScroll('left',Math.max(Math.abs(event.deltaY),Math.abs(event.deltaX)));
 
-              }
-          }}>
         <TabList id="tablist_scroll"
                  hasExtraButton={!!ExtraButton}
                  showModalButton={this.state.showModalButton}
@@ -354,13 +357,25 @@ export default class TabListComponent extends React.Component<Props, State> {
             </FoldButton>
           : null}
           {this.renderArrowButton(ScrollButton)}
+            <NativeListener onWheel={(event)=>{
+                event.preventDefault();
+                event.stopPropagation();
+                if(event.deltaY>0 || event.deltaX>0){
+                    this.handleScroll('right',Math.max(Math.abs(event.deltaY),Math.abs(event.deltaX)));
+                }else{
+                    this.handleScroll('left',Math.max(Math.abs(event.deltaY),Math.abs(event.deltaX)));
+
+                }
+            }}
+            >
           <ListInner ref={node => this.listContainer = node}>
             <ListScroll ref={node => this.listScroll = node} role="tablist">
               {this.renderTabs()}
             </ListScroll>
           </ListInner>
+            </NativeListener>
+
         </TabList>
-          </NativeListener>
 
           {modalIsOpen ?
           <TabModal closeModal={this.toggleModal.bind(this, false)}
