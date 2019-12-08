@@ -172,9 +172,9 @@ export default class TabListComponent extends React.Component<Props, State> {
   }
 
   getTabNode(tab: any): React.ElementRef<any> { // eslint-disable-line
-    if (tab.__INTERNAL_NODE) { // normal tab
+    if (tab && tab.__INTERNAL_NODE) { // normal tab
       return tab.__INTERNAL_NODE;
-    } else if (tab.__DRAG_TAB_INTERNAL_NODE) { // drag tab
+    } else if (tab && tab.__DRAG_TAB_INTERNAL_NODE) { // drag tab
       return tab.__DRAG_TAB_INTERNAL_NODE.node;
     }
   }
