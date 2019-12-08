@@ -184,6 +184,17 @@ export default class TabListComponent extends React.Component<Props, State> {
   }
 
   handleScroll(direction: 'right' | 'left', scrollWidth) {
+    if (!this.tabRefs) {
+      return;
+    }
+    // Scroll to the last element if the index is out of bounds
+    if(index > this.tabRefs.length - 1) {
+      index = this.tabRefs.length - 1;
+    }
+    // Cancel scrolling if there are no tabs
+    else if(this.tabRefs.length <= 0) {
+      return;
+    }
     let leftMove = 0;
     const containerOffset = this.listContainer.getBoundingClientRect();
     const containerWidth = this.listContainer.offsetWidth;
