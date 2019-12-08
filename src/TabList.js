@@ -227,6 +227,7 @@ export default class TabListComponent extends React.Component<Props, State> {
 
   // $FlowFixMe
   scrollToIndex(index: number, rectSide: 'left' | 'right') {
+    console.log(this.tabRefs)
      if (!this.tabRefs) {
       return;
     }
