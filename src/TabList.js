@@ -155,10 +155,9 @@ export default class TabListComponent extends React.Component<Props, State> {
       const rectSide = this.props.activeIndex === this.props.children.length - 1 ? 'right' : 'left';
       
       //PATCH __INTERNAL_NODE
-      if(this.props.activeIndex){
+      if(this.props.activeIndex && this.props.activeIndex > -1 && this.tabRefs && this.tabRefs.length > 0){
        this.scrollToIndex(this.props.activeIndex, rectSide);
       }
-      //PATCH __INTERNAL_NODE
       
       this.toggleModal(false);
     }
@@ -249,7 +248,6 @@ export default class TabListComponent extends React.Component<Props, State> {
     else if(this.tabRefs.length <= 0) {
       return;
     }
-    //PATCH __INTERNAL_NODE
     
     const tabOffset = this.getTabNode(this.tabRefs[index]).getBoundingClientRect();
     const containerOffset = this.listContainer.getBoundingClientRect();
