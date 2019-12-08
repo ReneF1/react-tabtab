@@ -153,7 +153,13 @@ export default class TabListComponent extends React.Component<Props, State> {
     if (prevProps.activeIndex !== this.props.activeIndex) {
       //if we scroll to the last tab, alignment is set to the right side of the tab
       const rectSide = this.props.activeIndex === this.props.children.length - 1 ? 'right' : 'left';
-      this.scrollToIndex(this.props.activeIndex, rectSide);
+      
+      //PATCH __INTERNAL_NODE
+      if(this.props.activeIndex){
+       this.scrollToIndex(this.props.activeIndex, rectSide);
+      }
+      //PATCH __INTERNAL_NODE
+      
       this.toggleModal(false);
     }
     // if prev state show arrow button, and current state doesn't show
@@ -184,17 +190,6 @@ export default class TabListComponent extends React.Component<Props, State> {
   }
 
   handleScroll(direction: 'right' | 'left', scrollWidth) {
-    if (!this.tabRefs) {
-      return;
-    }
-    // Scroll to the last element if the index is out of bounds
-    if(index > this.tabRefs.length - 1) {
-      index = this.tabRefs.length - 1;
-    }
-    // Cancel scrolling if there are no tabs
-    else if(this.tabRefs.length <= 0) {
-      return;
-    }
     let leftMove = 0;
     const containerOffset = this.listContainer.getBoundingClientRect();
     const containerWidth = this.listContainer.offsetWidth;
@@ -238,7 +233,12 @@ export default class TabListComponent extends React.Component<Props, State> {
 
   // $FlowFixMe
   scrollToIndex(index: number, rectSide: 'left' | 'right') {
-     if (!this.tabRefs || !index) {
+    
+    //PATCH __INTERNAL_NODE
+     if (!index || index === -1) {
+      return;
+    } 
+    if (!this.tabRefs) {
       return;
     }
     // Scroll to the last element if the index is out of bounds
@@ -249,6 +249,8 @@ export default class TabListComponent extends React.Component<Props, State> {
     else if(this.tabRefs.length <= 0) {
       return;
     }
+    //PATCH __INTERNAL_NODE
+    
     const tabOffset = this.getTabNode(this.tabRefs[index]).getBoundingClientRect();
     const containerOffset = this.listContainer.getBoundingClientRect();
     // Cancel scrolling if the tab is visible
