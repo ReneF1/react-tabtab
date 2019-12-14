@@ -163,6 +163,7 @@ export default class TabListComponent extends React.Component<Props, State> {
 
       //PATCH __INTERNAL_NODE
       if (
+        !this.props.invisibleTabs &&
         this.props.activeIndex &&
         this.props.activeIndex > -1 &&
         this.tabRefs &&
