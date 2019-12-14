@@ -187,9 +187,8 @@ export default class TabListComponent extends React.Component<Props, State> {
       this.isShowArrowButton();
     }
   }
-
+  // eslint-disable-next-line
   getTabNode(tab: any): React.ElementRef<any> {
-    // eslint-disable-line
     if (tab && tab.__INTERNAL_NODE) {
       // normal tab
       return tab.__INTERNAL_NODE;
@@ -356,8 +355,8 @@ export default class TabListComponent extends React.Component<Props, State> {
     );
   }
 
+  // eslint-disable-next-line
   renderArrowButton(ScrollButton: React.ComponentType<*>) {
-    // eslint-disable-line
     const { showArrowButton } = this.state;
     if (showArrowButton) {
       return (
