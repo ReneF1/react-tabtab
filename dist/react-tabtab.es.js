@@ -811,6 +811,7 @@ var TabListComponent = function (_React$Component) {
           handleTabChange = _props2.handleTabChange,
           handleTabSequence = _props2.handleTabSequence,
           ExtraButton = _props2.ExtraButton,
+          ExtraModalButton = _props2.ExtraModalButton,
           CustomModalButton = _props2.CustomModalButton;
       var modalIsOpen = this.state.modalIsOpen;
 
@@ -831,7 +832,7 @@ var TabListComponent = function (_React$Component) {
             showModalButton: this.state.showModalButton,
             showArrowButton: this.state.showArrowButton
           },
-          this.state.showModalButton && !CustomModalButton ? createElement(
+          this.state.showModalButton && !ExtraModalButton ? createElement(
             FoldButton,
             {
               ref: function ref(node) {
@@ -842,7 +843,7 @@ var TabListComponent = function (_React$Component) {
             },
             createElement(BulletIcon, null)
           ) : null,
-          this.state.showModalButton && CustomModalButton ? createElement(CustomModalButton, {
+          this.state.showModalButton && ExtraModalButton ? createElement(ExtraModalButton, {
             ref: function ref(node) {
               return _this4.foldNode = node;
             },

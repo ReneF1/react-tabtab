@@ -8,6 +8,7 @@ type Props = {
   showArrowButton?: "auto" | boolean,
   CustomModalButton?: React.Node,
   ExtraButton?: React.Node,
+  ExtraModalButton?: React.Node,
   onTabChange?: (event: any) => void,
   onTabSequenceChange?: (event: any) => void,
   onTabEdit?: (event: any) => void,

@@ -104,6 +104,7 @@ type Props = {
   handleTabSequence: (event: any) => void,
   handleEdit: (event: any) => void,
   ExtraButton: React.Element<*>,
+  ExtraModalButton: React.Element<*>,
   children: React.ChildrenArray<*>
 };
 
@@ -186,7 +187,7 @@ export default class TabListComponent extends React.Component<Props, State> {
     }
   }
 
-  getTabNode(tab: any): React.ElementRef<any> { // eslint-disable-line
+  getTabNode(tab: any): React.ElementRef<any> {  // eslint-disable-line
     if (tab && tab.__INTERNAL_NODE) {
       // normal tab
       return tab.__INTERNAL_NODE;
@@ -389,6 +390,7 @@ export default class TabListComponent extends React.Component<Props, State> {
       handleTabChange,
       handleTabSequence,
       ExtraButton,
+      ExtraModalButton,
       CustomModalButton
     } = this.props;
     const { modalIsOpen } = this.state;
@@ -410,7 +412,7 @@ export default class TabListComponent extends React.Component<Props, State> {
           showModalButton={this.state.showModalButton}
           showArrowButton={this.state.showArrowButton}
         >
-          {this.state.showModalButton && !CustomModalButton ? (
+          {this.state.showModalButton && !ExtraModalButton ? (
             <FoldButton
               ref={node => (this.foldNode = node)}
               onClick={this.toggleModal.bind(this, true)}
@@ -419,8 +421,8 @@ export default class TabListComponent extends React.Component<Props, State> {
               <BulletIcon />
             </FoldButton>
           ) : null}
-          {this.state.showModalButton && CustomModalButton ? (
-            <CustomModalButton
+          {this.state.showModalButton && ExtraModalButton ? (
+            <ExtraModalButton
               ref={node => (this.foldNode = node)}
               onClick={this.toggleModal.bind(this, true)}
               showArrowButton={this.state.showArrowButton}
