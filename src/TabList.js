@@ -144,7 +144,7 @@ export default class TabListComponent extends React.Component<Props, State> {
   componentDidMount() {
     this.isShowArrowButton();
     this.isShowModalButton();
-    if (this.props.activeIndex > 0)
+    if (!this.props.invisibleTabs && this.props.activeIndex > 0)
       this.scrollToIndex(this.props.activeIndex, "left");
   }
 
