@@ -390,7 +390,6 @@ export default class TabListComponent extends React.Component<Props, State> {
       activeIndex,
       handleTabChange,
       handleTabSequence,
-      ExtraButton,
       CustomModalButton
     } = this.props;
     const { modalIsOpen } = this.state;

@@ -1,11 +1,12 @@
 // @flow
-import * as React from 'react';
+import * as React from "react";
 
 type Props = {
   defaultIndex?: number,
   activeIndex?: number,
   showModalButton?: number | boolean,
-  showArrowButton?: 'auto' | boolean ,
+  showArrowButton?: "auto" | boolean,
+  CustomModalButton?: React.Node,
   ExtraButton?: React.Node,
   onTabChange?: (event: any) => void,
   onTabSequenceChange?: (event: any) => void,
@@ -36,7 +37,8 @@ export default class Tabs extends React.Component<Props, State> {
 
   static defaultProps = {
     showModalButton: 4,
-    showArrowButton: 'auto',
+    CustomModalButton: null,
+    showArrowButton: "auto",
     onTabChange: () => {},
     onTabSequenceChange: () => {},
     customStyle: {
@@ -45,64 +47,68 @@ export default class Tabs extends React.Component<Props, State> {
       Panel: null,
       ActionButton: null
     }
-  }
+  };
 
   getActiveIndex(props: Props) {
-    const {defaultIndex, activeIndex} = props;
-    if (activeIndex)
-      return activeIndex;
-    if (defaultIndex)
-      return defaultIndex;
+    const { defaultIndex, activeIndex } = props;
+    if (activeIndex) return activeIndex;
+    if (defaultIndex) return defaultIndex;
     return 0;
   }
 
   componentWillReceiveProps(nextProps: Props) {
     if (nextProps.activeIndex !== this.props.activeIndex) {
-      this.setState({activeIndex: nextProps.activeIndex});
+      this.setState({ activeIndex: nextProps.activeIndex });
     }
   }
 
   handleTabChange(index: number) {
-    const {activeIndex, onTabChange} = this.props;
+    const { activeIndex, onTabChange } = this.props;
     if (activeIndex !== 0 && !activeIndex) {
-      this.setState({activeIndex: index});
+      this.setState({ activeIndex: index });
     }
     if (onTabChange) {
-      onTabChange(index);      
+      onTabChange(index);
     }
   }
 
-  handleTabSequence({oldIndex, newIndex}: {oldIndex: number, newIndex: number}) {
-    const {onTabSequenceChange} = this.props;
+  handleTabSequence({
+    oldIndex,
+    newIndex
+  }: {
+    oldIndex: number,
+    newIndex: number
+  }) {
+    const { onTabSequenceChange } = this.props;
     if (onTabSequenceChange) {
-      onTabSequenceChange({oldIndex, newIndex});
+      onTabSequenceChange({ oldIndex, newIndex });
     }
   }
 
-  handleEdit({type, index}: {type: string, index: number}) {
-    const {onTabEdit} = this.props;
+  handleEdit({ type, index }: { type: string, index: number }) {
+    const { onTabEdit } = this.props;
     if (onTabEdit) {
-      onTabEdit({type, index});
+      onTabEdit({ type, index });
     }
   }
 
   render() {
-    const {children, ...extraProps} = this.props;
-    const {activeIndex} = this.state;
+    const { children, ...extraProps } = this.props;
+    const { activeIndex } = this.state;
     const props = {
       handleTabChange: this.handleTabChange,
       handleTabSequence: this.handleTabSequence,
       handleEdit: this.handleEdit,
       activeIndex,
       ...extraProps
-    }
+    };
 
     return (
       <div>
-        {React.Children.map(children, (child) => {
+        {React.Children.map(children, child => {
           return React.cloneElement(child, props);
         })}
       </div>
-    )
+    );
   }
 }
