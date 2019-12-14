@@ -131,7 +131,7 @@ var Tabs = function (_React$Component) {
   }
 
   createClass(Tabs, [{
-    key: 'getActiveIndex',
+    key: "getActiveIndex",
     value: function getActiveIndex(props) {
       var defaultIndex = props.defaultIndex,
           activeIndex = props.activeIndex;
@@ -141,14 +141,14 @@ var Tabs = function (_React$Component) {
       return 0;
     }
   }, {
-    key: 'componentWillReceiveProps',
+    key: "componentWillReceiveProps",
     value: function componentWillReceiveProps(nextProps) {
       if (nextProps.activeIndex !== this.props.activeIndex) {
         this.setState({ activeIndex: nextProps.activeIndex });
       }
     }
   }, {
-    key: 'handleTabChange',
+    key: "handleTabChange",
     value: function handleTabChange(index) {
       var _props = this.props,
           activeIndex = _props.activeIndex,
@@ -162,7 +162,7 @@ var Tabs = function (_React$Component) {
       }
     }
   }, {
-    key: 'handleTabSequence',
+    key: "handleTabSequence",
     value: function handleTabSequence(_ref) {
       var oldIndex = _ref.oldIndex,
           newIndex = _ref.newIndex;
@@ -173,7 +173,7 @@ var Tabs = function (_React$Component) {
       }
     }
   }, {
-    key: 'handleEdit',
+    key: "handleEdit",
     value: function handleEdit(_ref2) {
       var type = _ref2.type,
           index = _ref2.index;
@@ -184,11 +184,11 @@ var Tabs = function (_React$Component) {
       }
     }
   }, {
-    key: 'render',
+    key: "render",
     value: function render() {
       var _props2 = this.props,
           children = _props2.children,
-          extraProps = objectWithoutProperties(_props2, ['children']);
+          extraProps = objectWithoutProperties(_props2, ["children"]);
       var activeIndex = this.state.activeIndex;
 
       var props = _extends({
@@ -199,7 +199,7 @@ var Tabs = function (_React$Component) {
       }, extraProps);
 
       return createElement(
-        'div',
+        "div",
         null,
         Children.map(children, function (child) {
           return cloneElement(child, props);
@@ -212,7 +212,8 @@ var Tabs = function (_React$Component) {
 
 Tabs.defaultProps = {
   showModalButton: 4,
-  showArrowButton: 'auto',
+  CustomModalButton: null,
+  showArrowButton: "auto",
   onTabChange: function onTabChange() {},
   onTabSequenceChange: function onTabSequenceChange() {},
   customStyle: {
@@ -467,12 +468,12 @@ var NativeListener = function (_Component) {
 
 NativeListener.displayName = 'NativeListener';
 
-var _templateObject = taggedTemplateLiteral(['\n  background-color: white;\n  text-align: left;\n  position: relative;\n  white-space: nowrap;\n  overflow: hidden;\n  width: auto;\n  padding: ', ';\n'], ['\n  background-color: white;\n  text-align: left;\n  position: relative;\n  white-space: nowrap;\n  overflow: hidden;\n  width: auto;\n  padding: ', ';\n']);
-var _templateObject2 = taggedTemplateLiteral(['\n  overflow: hidden;\n'], ['\n  overflow: hidden;\n']);
-var _templateObject3 = taggedTemplateLiteral(['\n  padding-left: 0;\n  position: relative;\n  margin: 0;\n  list-style: none;\n  display: inline-block;\n'], ['\n  padding-left: 0;\n  position: relative;\n  margin: 0;\n  list-style: none;\n  display: inline-block;\n']);
-var _templateObject4 = taggedTemplateLiteral(['\n  height: 100%;\n  width ', 'px;\n  text-align: center;\n  border: 1px solid #d9d9d9;\n  border-bottom: 0;\n  border-radius: 4px 4px 0 0;\n  background: #f9f9f9;\n  > svg {\n    padding-top: 11px;\n  }\n'], ['\n  height: 100%;\n  width ', 'px;\n  text-align: center;\n  border: 1px solid #d9d9d9;\n  border-bottom: 0;\n  border-radius: 4px 4px 0 0;\n  background: #f9f9f9;\n  > svg {\n    padding-top: 11px;\n  }\n']);
-var _templateObject5 = taggedTemplateLiteral(['\n  display: inline-block;\n  filter: none;\n  position: absolute;\n  ', ';\n  &:hover {\n    cursor: pointer;\n  }\n'], ['\n  display: inline-block;\n  filter: none;\n  position: absolute;\n  ', ';\n  &:hover {\n    cursor: pointer;\n  }\n']);
-var _templateObject6 = taggedTemplateLiteral(['\n  display: inline-block;\n  filter: none;\n  position: absolute;\n  left: 0;\n  &:hover {\n    cursor: pointer;\n  }\n'], ['\n  display: inline-block;\n  filter: none;\n  position: absolute;\n  left: 0;\n  &:hover {\n    cursor: pointer;\n  }\n']);
+var _templateObject = taggedTemplateLiteral(["\n  background-color: white;\n  text-align: left;\n  position: relative;\n  white-space: nowrap;\n  overflow: hidden;\n  width: auto;\n  padding: ", ";\n"], ["\n  background-color: white;\n  text-align: left;\n  position: relative;\n  white-space: nowrap;\n  overflow: hidden;\n  width: auto;\n  padding: ", ";\n"]);
+var _templateObject2 = taggedTemplateLiteral(["\n  overflow: hidden;\n"], ["\n  overflow: hidden;\n"]);
+var _templateObject3 = taggedTemplateLiteral(["\n  padding-left: 0;\n  position: relative;\n  margin: 0;\n  list-style: none;\n  display: inline-block;\n"], ["\n  padding-left: 0;\n  position: relative;\n  margin: 0;\n  list-style: none;\n  display: inline-block;\n"]);
+var _templateObject4 = taggedTemplateLiteral(["\n  height: 100%;\n  width ", "px;\n  text-align: center;\n  border: 1px solid #d9d9d9;\n  border-bottom: 0;\n  border-radius: 4px 4px 0 0;\n  background: #f9f9f9;\n  > svg {\n    padding-top: 11px;\n  }\n"], ["\n  height: 100%;\n  width ", "px;\n  text-align: center;\n  border: 1px solid #d9d9d9;\n  border-bottom: 0;\n  border-radius: 4px 4px 0 0;\n  background: #f9f9f9;\n  > svg {\n    padding-top: 11px;\n  }\n"]);
+var _templateObject5 = taggedTemplateLiteral(["\n  display: inline-block;\n  filter: none;\n  position: absolute;\n  ", ";\n  &:hover {\n    cursor: pointer;\n  }\n"], ["\n  display: inline-block;\n  filter: none;\n  position: absolute;\n  ", ";\n  &:hover {\n    cursor: pointer;\n  }\n"]);
+var _templateObject6 = taggedTemplateLiteral(["\n  display: inline-block;\n  filter: none;\n  position: absolute;\n  left: 0;\n  &:hover {\n    cursor: pointer;\n  }\n"], ["\n  display: inline-block;\n  filter: none;\n  position: absolute;\n  left: 0;\n  &:hover {\n    cursor: pointer;\n  }\n"]);
 
 //      
 var buttonWidth = 35;
@@ -498,7 +499,7 @@ var getPadding = function getPadding(_ref) {
   if (paddingRight > 0) {
     paddingRight += 3;
   }
-  return '0 ' + paddingRight + 'px 0 ' + paddingLeft + 'px';
+  return "0 " + paddingRight + "px 0 " + paddingLeft + "px";
 };
 
 var TabListStyle = styled.div(_templateObject, function (props) {
@@ -513,7 +514,7 @@ var ActionButtonStyle = styled.div(_templateObject4, buttonWidth);
 
 var makeScrollButton = function makeScrollButton(ActionButton) {
   return styled(ActionButton)(_templateObject5, function (props) {
-    return props.left ? props.showModalButton ? 'left: ' + (buttonWidth + 2) + 'px' : 'left: 0' : 'right: 0';
+    return props.left ? props.showModalButton ? "left: " + (buttonWidth + 2) + "px" : "left: 0" : "right: 0";
   });
 };
 
@@ -546,14 +547,14 @@ var TabListComponent = function (_React$Component) {
   }
 
   createClass(TabListComponent, [{
-    key: 'componentDidMount',
+    key: "componentDidMount",
     value: function componentDidMount() {
       this.isShowArrowButton();
       this.isShowModalButton();
-      if (this.props.activeIndex > 0) this.scrollToIndex(this.props.activeIndex, 'left');
+      if (this.props.activeIndex > 0) this.scrollToIndex(this.props.activeIndex, "left");
     }
   }, {
-    key: 'componentDidUpdate',
+    key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps, prevState) {
       if (prevProps.children.length !== this.props.children.length) {
         this.isShowArrowButton();
@@ -562,7 +563,7 @@ var TabListComponent = function (_React$Component) {
 
       if (prevProps.activeIndex !== this.props.activeIndex) {
         //if we scroll to the last tab, alignment is set to the right side of the tab
-        var rectSide = this.props.activeIndex === this.props.children.length - 1 ? 'right' : 'left';
+        var rectSide = this.props.activeIndex === this.props.children.length - 1 ? "right" : "left";
 
         //PATCH __INTERNAL_NODE
         if (this.props.activeIndex && this.props.activeIndex > -1 && this.tabRefs && this.tabRefs.length > 0) {
@@ -586,7 +587,7 @@ var TabListComponent = function (_React$Component) {
       }
     }
   }, {
-    key: 'getTabNode',
+    key: "getTabNode",
     value: function getTabNode(tab) {
       // eslint-disable-line
       if (tab && tab.__INTERNAL_NODE) {
@@ -598,31 +599,31 @@ var TabListComponent = function (_React$Component) {
       }
     }
   }, {
-    key: 'unifyScrollMax',
+    key: "unifyScrollMax",
     value: function unifyScrollMax(width) {
       return parseFloat(width / 3 * 2);
     }
   }, {
-    key: 'handleScroll',
+    key: "handleScroll",
     value: function handleScroll(direction, scrollWidth) {
       var leftMove = 0;
       var containerOffset = this.listContainer.getBoundingClientRect();
       var containerWidth = this.listContainer.offsetWidth;
       var tabFirstOffset = this.getTabNode(this.tabRefs[0]).getBoundingClientRect();
       var tabLastOffset = this.getTabNode(this.tabRefs[this.tabRefs.length - 1]).getBoundingClientRect();
-      if (direction === 'right') {
+      if (direction === "right") {
         leftMove = tabLastOffset.right - containerOffset.right;
         if (leftMove > containerWidth) {
           leftMove = this.unifyScrollMax(containerWidth);
         }
-      } else if (direction === 'left') {
+      } else if (direction === "left") {
         leftMove = tabFirstOffset.left - containerOffset.left;
         if (-leftMove > containerWidth) {
           leftMove = -this.unifyScrollMax(containerWidth);
         }
       }
       if (scrollWidth) {
-        if (direction === 'right') {
+        if (direction === "right") {
           var max = tabLastOffset.right - containerOffset.right;
           if (max >= 0) {
             this.scrollPosition += scrollWidth;
@@ -639,19 +640,18 @@ var TabListComponent = function (_React$Component) {
       }
 
       if (!scrollWidth) {
-        this.listScroll.style.transition = 'transform .3s cubic-bezier(.42, 0, .58, 1)';
+        this.listScroll.style.transition = "transform .3s cubic-bezier(.42, 0, .58, 1)";
       } else {
         this.listScroll.style.transition = null;
       }
-      this.listScroll.style.transform = 'translate3d(-' + this.scrollPosition + 'px, 0, 0)';
+      this.listScroll.style.transform = "translate3d(-" + this.scrollPosition + "px, 0, 0)";
     }
 
     // $FlowFixMe
 
   }, {
-    key: 'scrollToIndex',
+    key: "scrollToIndex",
     value: function scrollToIndex(index, rectSide) {
-
       //PATCH __INTERNAL_NODE
       if (!index || index === -1) {
         return;
@@ -677,20 +677,20 @@ var TabListComponent = function (_React$Component) {
       if (this.scrollPosition < 0) {
         this.scrollPosition = 0;
       }
-      this.listScroll.style.transform = 'translate3d(-' + this.scrollPosition + 'px, 0, 0)';
+      this.listScroll.style.transform = "translate3d(-" + this.scrollPosition + "px, 0, 0)";
     }
   }, {
-    key: 'scrollToZero',
+    key: "scrollToZero",
     value: function scrollToZero() {
-      this.listScroll.style.transform = 'translate3d(0, 0, 0)';
+      this.listScroll.style.transform = "translate3d(0, 0, 0)";
     }
   }, {
-    key: 'toggleModal',
+    key: "toggleModal",
     value: function toggleModal(open) {
       this.setState({ modalIsOpen: open });
     }
   }, {
-    key: 'isShowModalButton',
+    key: "isShowModalButton",
     value: function isShowModalButton() {
       var showModalButton = this.props.showModalButton;
 
@@ -701,11 +701,11 @@ var TabListComponent = function (_React$Component) {
       this.setState({ showModalButton: showModalButton });
     }
   }, {
-    key: 'isShowArrowButton',
+    key: "isShowArrowButton",
     value: function isShowArrowButton() {
       var showArrowButton = this.props.showArrowButton;
 
-      if (showArrowButton === 'auto') {
+      if (showArrowButton === "auto") {
         var tabWidth = 0;
         var containerWidth = this.listContainer.offsetWidth;
         showArrowButton = false;
@@ -722,7 +722,7 @@ var TabListComponent = function (_React$Component) {
       this.setState({ showArrowButton: showArrowButton });
     }
   }, {
-    key: 'renderTabs',
+    key: "renderTabs",
     value: function renderTabs() {
       var _this2 = this;
 
@@ -759,7 +759,7 @@ var TabListComponent = function (_React$Component) {
       });
     }
   }, {
-    key: 'renderArrowButton',
+    key: "renderArrowButton",
     value: function renderArrowButton(ScrollButton) {
       var _this3 = this;
 
@@ -768,28 +768,32 @@ var TabListComponent = function (_React$Component) {
 
       if (showArrowButton) {
         return createElement(
-          'div',
+          "div",
           null,
           createElement(
             ScrollButton,
-            { left: true,
+            {
+              left: true,
               onClick: function onClick() {
-                _this3.handleScroll('left');
+                _this3.handleScroll("left");
               },
               ref: function ref(node) {
                 return _this3.leftArrowNode = node;
               },
-              showModalButton: this.state.showModalButton },
+              showModalButton: this.state.showModalButton
+            },
             createElement(LeftIcon, null)
           ),
           createElement(
             ScrollButton,
-            { onClick: function onClick() {
-                _this3.handleScroll('right');
+            {
+              onClick: function onClick() {
+                _this3.handleScroll("right");
               },
               ref: function ref(node) {
                 return _this3.rightArrowNode = node;
-              } },
+              }
+            },
             createElement(RightIcon, null)
           )
         );
@@ -797,7 +801,7 @@ var TabListComponent = function (_React$Component) {
       return null;
     }
   }, {
-    key: 'render',
+    key: "render",
     value: function render() {
       var _this4 = this;
 
@@ -806,44 +810,55 @@ var TabListComponent = function (_React$Component) {
           activeIndex = _props2.activeIndex,
           handleTabChange = _props2.handleTabChange,
           handleTabSequence = _props2.handleTabSequence,
-          ExtraButton = _props2.ExtraButton;
+          CustomModalButton = _props2.CustomModalButton;
       var modalIsOpen = this.state.modalIsOpen;
 
       var TabList = customStyle.TabList || TabListStyle;
       var ActionButton = customStyle.ActionButton || ActionButtonStyle;
       var ScrollButton = makeScrollButton(ActionButton);
       var FoldButton = makeFoldButton(ActionButton);
-      browser(this.props.children, 'React-tabtab Error: You MUST pass at least one tab');
+      browser(this.props.children, "React-tabtab Error: You MUST pass at least one tab");
       return createElement(
-        'div',
+        "div",
         null,
         ExtraButton ? ExtraButton : null,
         createElement(
           TabList,
-          { id: 'tablist_scroll',
+          {
+            id: "tablist_scroll",
             hasExtraButton: !!ExtraButton,
             showModalButton: this.state.showModalButton,
             showArrowButton: this.state.showArrowButton
           },
-          this.state.showModalButton ? createElement(
+          this.state.showModalButton && !CustomModalButton ? createElement(
             FoldButton,
-            { ref: function ref(node) {
+            {
+              ref: function ref(node) {
                 return _this4.foldNode = node;
               },
               onClick: this.toggleModal.bind(this, true),
-              showArrowButton: this.state.showArrowButton },
+              showArrowButton: this.state.showArrowButton
+            },
             createElement(BulletIcon, null)
           ) : null,
+          this.state.showModalButton && CustomModalButton ? createElement(CustomModalButton, {
+            ref: function ref(node) {
+              return _this4.foldNode = node;
+            },
+            onClick: this.toggleModal.bind(this, true),
+            showArrowButton: this.state.showArrowButton
+          }) : null,
           this.renderArrowButton(ScrollButton),
           createElement(
             NativeListener,
-            { onWheel: function onWheel(event) {
+            {
+              onWheel: function onWheel(event) {
                 event.preventDefault();
                 event.stopPropagation();
                 if (event.deltaY > 0 || event.deltaX > 0) {
-                  _this4.handleScroll('right', Math.max(Math.abs(event.deltaY), Math.abs(event.deltaX)));
+                  _this4.handleScroll("right", Math.max(Math.abs(event.deltaY), Math.abs(event.deltaX)));
                 } else {
-                  _this4.handleScroll('left', Math.max(Math.abs(event.deltaY), Math.abs(event.deltaX)));
+                  _this4.handleScroll("left", Math.max(Math.abs(event.deltaY), Math.abs(event.deltaX)));
                 }
               }
             },
@@ -856,7 +871,7 @@ var TabListComponent = function (_React$Component) {
                 ListScroll,
                 { ref: function ref(node) {
                     return _this4.listScroll = node;
-                  }, role: 'tablist' },
+                  }, role: "tablist" },
                 this.renderTabs()
               )
             )
@@ -864,10 +879,12 @@ var TabListComponent = function (_React$Component) {
         ),
         modalIsOpen ? createElement(
           TabModal,
-          { closeModal: this.toggleModal.bind(this, false),
+          {
+            closeModal: this.toggleModal.bind(this, false),
             handleTabSequence: handleTabSequence,
             handleTabChange: handleTabChange,
-            activeIndex: activeIndex },
+            activeIndex: activeIndex
+          },
           this.renderTabs({ vertical: true }, true)
         ) : null
       );
@@ -876,7 +893,7 @@ var TabListComponent = function (_React$Component) {
   return TabListComponent;
 }(Component);
 
-TabListComponent.displayName = 'TabList';
+TabListComponent.displayName = "TabList";
 
 var _templateObject$2 = taggedTemplateLiteral(['\n  display: inline-block;\n  color: #777;\n  margin-left: 5px;\n  padding: 0;\n  vertical-align: middle;\n  border: 0;\n  padding: 2px;\n  outline: 0;\n  &:hover {\n    color: black;\n    background-color: #eee;\n    cursor: pointer;\n    border-radius: 50%;\n  }\n  > svg {\n    vertical-align: middle;\n  }\n'], ['\n  display: inline-block;\n  color: #777;\n  margin-left: 5px;\n  padding: 0;\n  vertical-align: middle;\n  border: 0;\n  padding: 2px;\n  outline: 0;\n  &:hover {\n    color: black;\n    background-color: #eee;\n    cursor: pointer;\n    border-radius: 50%;\n  }\n  > svg {\n    vertical-align: middle;\n  }\n']);
 
@@ -1267,7 +1284,7 @@ var Wrapper = styled.button(_templateObject$4, function (props) {
   return props.disabled ? '\n    pointer-events: none;\n    color: #AAA;\n    background: #F5F5F5;\n  ' : null;
 });
 
-var ExtraButton = function (_React$PureComponent) {
+var ExtraButton$1 = function (_React$PureComponent) {
   inherits(ExtraButton, _React$PureComponent);
 
   function ExtraButton() {
@@ -1292,7 +1309,7 @@ var ExtraButton = function (_React$PureComponent) {
   return ExtraButton;
 }(PureComponent);
 
-ExtraButton.defaultProps = {
+ExtraButton$1.defaultProps = {
   disabled: false
 };
 
@@ -1307,7 +1324,7 @@ var defaultOutput = {
   PanelList: PanelList,
   Panel: PanelComponent,
   AsyncPanel: AsyncPanelComponent,
-  ExtraButton: ExtraButton,
+  ExtraButton: ExtraButton$1,
   styled: styled$1
 };
 
