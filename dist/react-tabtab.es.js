@@ -812,7 +812,7 @@ var TabListComponent = function (_React$Component) {
           handleTabSequence = _props2.handleTabSequence,
           ExtraButton = _props2.ExtraButton,
           ExtraModalButton = _props2.ExtraModalButton,
-          CustomModalButton = _props2.CustomModalButton;
+          invisibleTabs = _props2.invisibleTabs;
       var modalIsOpen = this.state.modalIsOpen;
 
       var TabList = customStyle.TabList || TabListStyle;
@@ -824,6 +824,13 @@ var TabListComponent = function (_React$Component) {
         "div",
         null,
         ExtraButton ? ExtraButton : null,
+        this.state.showModalButton && ExtraModalButton ? createElement(ExtraModalButton, {
+          ref: function ref(node) {
+            return _this4.foldNode = node;
+          },
+          onClick: this.toggleModal.bind(this, true),
+          showArrowButton: this.state.showArrowButton
+        }) : null,
         createElement(
           TabList,
           {
@@ -843,15 +850,8 @@ var TabListComponent = function (_React$Component) {
             },
             createElement(BulletIcon, null)
           ) : null,
-          this.state.showModalButton && ExtraModalButton ? createElement(ExtraModalButton, {
-            ref: function ref(node) {
-              return _this4.foldNode = node;
-            },
-            onClick: this.toggleModal.bind(this, true),
-            showArrowButton: this.state.showArrowButton
-          }) : null,
           this.renderArrowButton(ScrollButton),
-          createElement(
+          !invisibleTabs && createElement(
             NativeListener,
             {
               onWheel: function onWheel(event) {
@@ -871,9 +871,12 @@ var TabListComponent = function (_React$Component) {
                 } },
               createElement(
                 ListScroll,
-                { ref: function ref(node) {
+                {
+                  ref: function ref(node) {
                     return _this4.listScroll = node;
-                  }, role: "tablist" },
+                  },
+                  role: "tablist"
+                },
                 this.renderTabs()
               )
             )

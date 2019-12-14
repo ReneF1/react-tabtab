@@ -18,7 +18,8 @@ type Props = {
     Panel?: () => void,
     ActionButton?: () => void
   },
-  children: React.Element<*>
+  children: React.Element<*>,
+  invisibleTabs?: boolean
 };
 
 type State = {

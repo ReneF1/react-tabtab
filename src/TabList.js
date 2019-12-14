@@ -105,7 +105,8 @@ type Props = {
   handleEdit: (event: any) => void,
   ExtraButton: React.Element<*>,
   ExtraModalButton: React.Element<*>,
-  children: React.ChildrenArray<*>
+  children: React.ChildrenArray<*>,
+  invisibleTabs: boolean
 };
 
 type State = {
@@ -187,7 +188,8 @@ export default class TabListComponent extends React.Component<Props, State> {
     }
   }
 
-  getTabNode(tab: any): React.ElementRef<any> {  // eslint-disable-line
+  getTabNode(tab: any): React.ElementRef<any> {
+    // eslint-disable-line
     if (tab && tab.__INTERNAL_NODE) {
       // normal tab
       return tab.__INTERNAL_NODE;
@@ -354,7 +356,8 @@ export default class TabListComponent extends React.Component<Props, State> {
     );
   }
 
-  renderArrowButton(ScrollButton: React.ComponentType<*>) {     // eslint-disable-line
+  renderArrowButton(ScrollButton: React.ComponentType<*>) {
+    // eslint-disable-line
     const { showArrowButton } = this.state;
     if (showArrowButton) {
       return (
@@ -391,7 +394,7 @@ export default class TabListComponent extends React.Component<Props, State> {
       handleTabSequence,
       ExtraButton,
       ExtraModalButton,
-      CustomModalButton
+      invisibleTabs
     } = this.props;
     const { modalIsOpen } = this.state;
     const TabList = customStyle.TabList || TabListStyle;
@@ -405,7 +408,13 @@ export default class TabListComponent extends React.Component<Props, State> {
     return (
       <div>
         {ExtraButton ? ExtraButton : null}
-
+        {this.state.showModalButton && ExtraModalButton ? (
+          <ExtraModalButton
+            ref={node => (this.foldNode = node)}
+            onClick={this.toggleModal.bind(this, true)}
+            showArrowButton={this.state.showArrowButton}
+          />
+        ) : null}
         <TabList
           id="tablist_scroll"
           hasExtraButton={!!ExtraButton}
@@ -421,37 +430,35 @@ export default class TabListComponent extends React.Component<Props, State> {
               <BulletIcon />
             </FoldButton>
           ) : null}
-          {this.state.showModalButton && ExtraModalButton ? (
-            <ExtraModalButton
-              ref={node => (this.foldNode = node)}
-              onClick={this.toggleModal.bind(this, true)}
-              showArrowButton={this.state.showArrowButton}
-            />
-          ) : null}
           {this.renderArrowButton(ScrollButton)}
-          <NativeListener
-            onWheel={event => {
-              event.preventDefault();
-              event.stopPropagation();
-              if (event.deltaY > 0 || event.deltaX > 0) {
-                this.handleScroll(
-                  "right",
-                  Math.max(Math.abs(event.deltaY), Math.abs(event.deltaX))
-                );
-              } else {
-                this.handleScroll(
-                  "left",
-                  Math.max(Math.abs(event.deltaY), Math.abs(event.deltaX))
-                );
-              }
-            }}
-          >
-            <ListInner ref={node => (this.listContainer = node)}>
-              <ListScroll ref={node => (this.listScroll = node)} role="tablist">
-                {this.renderTabs()}
-              </ListScroll>
-            </ListInner>
-          </NativeListener>
+          {!invisibleTabs && (
+            <NativeListener
+              onWheel={event => {
+                event.preventDefault();
+                event.stopPropagation();
+                if (event.deltaY > 0 || event.deltaX > 0) {
+                  this.handleScroll(
+                    "right",
+                    Math.max(Math.abs(event.deltaY), Math.abs(event.deltaX))
+                  );
+                } else {
+                  this.handleScroll(
+                    "left",
+                    Math.max(Math.abs(event.deltaY), Math.abs(event.deltaX))
+                  );
+                }
+              }}
+            >
+              <ListInner ref={node => (this.listContainer = node)}>
+                <ListScroll
+                  ref={node => (this.listScroll = node)}
+                  role="tablist"
+                >
+                  {this.renderTabs()}
+                </ListScroll>
+              </ListInner>
+            </NativeListener>
+          )}
         </TabList>
 
         {modalIsOpen ? (
