@@ -563,8 +563,13 @@ var TabListComponent = function (_React$Component) {
 
       if (prevProps.activeIndex !== this.props.activeIndex) {
         //if we scroll to the last tab, alignment is set to the right side of the tab
-        var rectSide = this.props.activeIndex === this.props.children.length - 1 ? 'right' : 'left';
-        this.scrollToIndex(this.props.activeIndex, rectSide);
+        var rectSide = this.props.activeIndex === this.props.children.length - 1 ? "right" : "left";
+
+        //PATCH __INTERNAL_NODE
+        if (this.props.activeIndex && this.props.activeIndex > -1 && this.tabRefs && this.tabRefs.length > 0) {
+          this.scrollToIndex(this.props.activeIndex, rectSide);
+        }
+
         this.toggleModal(false);
       }
       // if prev state show arrow button, and current state doesn't show
@@ -585,10 +590,10 @@ var TabListComponent = function (_React$Component) {
     key: "getTabNode",
     value: function getTabNode(tab) {
       // eslint-disable-line
-      if (tab.__INTERNAL_NODE) {
+      if (tab && tab.__INTERNAL_NODE) {
         // normal tab
         return tab.__INTERNAL_NODE;
-      } else if (tab.__DRAG_TAB_INTERNAL_NODE) {
+      } else if (tab && tab.__DRAG_TAB_INTERNAL_NODE) {
         // drag tab
         return tab.__DRAG_TAB_INTERNAL_NODE.node;
       }
@@ -647,6 +652,22 @@ var TabListComponent = function (_React$Component) {
   }, {
     key: "scrollToIndex",
     value: function scrollToIndex(index, rectSide) {
+      //PATCH __INTERNAL_NODE
+      if (!index || index === -1) {
+        return;
+      }
+      if (!this.tabRefs) {
+        return;
+      }
+      // Scroll to the last element if the index is out of bounds
+      if (index > this.tabRefs.length - 1) {
+        index = this.tabRefs.length - 1;
+      }
+      // Cancel scrolling if there are no tabs
+      else if (this.tabRefs.length <= 0) {
+          return;
+        }
+
       var tabOffset = this.getTabNode(this.tabRefs[index]).getBoundingClientRect();
       var containerOffset = this.listContainer.getBoundingClientRect();
       // Cancel scrolling if the tab is visible
@@ -789,6 +810,7 @@ var TabListComponent = function (_React$Component) {
           activeIndex = _props2.activeIndex,
           handleTabChange = _props2.handleTabChange,
           handleTabSequence = _props2.handleTabSequence,
+          ExtraButton = _props2.ExtraButton,
           CustomModalButton = _props2.CustomModalButton;
       var modalIsOpen = this.state.modalIsOpen;
 
@@ -1263,7 +1285,7 @@ var Wrapper = styled.button(_templateObject$4, function (props) {
   return props.disabled ? '\n    pointer-events: none;\n    color: #AAA;\n    background: #F5F5F5;\n  ' : null;
 });
 
-var ExtraButton$1 = function (_React$PureComponent) {
+var ExtraButton = function (_React$PureComponent) {
   inherits(ExtraButton, _React$PureComponent);
 
   function ExtraButton() {
@@ -1288,7 +1310,7 @@ var ExtraButton$1 = function (_React$PureComponent) {
   return ExtraButton;
 }(PureComponent);
 
-ExtraButton$1.defaultProps = {
+ExtraButton.defaultProps = {
   disabled: false
 };
 
@@ -1303,7 +1325,7 @@ var defaultOutput = {
   PanelList: PanelList,
   Panel: PanelComponent,
   AsyncPanel: AsyncPanelComponent,
-  ExtraButton: ExtraButton$1,
+  ExtraButton: ExtraButton,
   styled: styled$1
 };
 
