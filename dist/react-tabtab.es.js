@@ -586,10 +586,11 @@ var TabListComponent = function (_React$Component) {
         this.isShowArrowButton();
       }
     }
+    // eslint-disable-next-line
+
   }, {
     key: "getTabNode",
     value: function getTabNode(tab) {
-      // eslint-disable-line
       if (tab && tab.__INTERNAL_NODE) {
         // normal tab
         return tab.__INTERNAL_NODE;
@@ -758,12 +759,14 @@ var TabListComponent = function (_React$Component) {
         }, props, options));
       });
     }
+
+    // eslint-disable-next-line
+
   }, {
     key: "renderArrowButton",
     value: function renderArrowButton(ScrollButton) {
       var _this3 = this;
 
-      // eslint-disable-line
       var showArrowButton = this.state.showArrowButton;
 
       if (showArrowButton) {
